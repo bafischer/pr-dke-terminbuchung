@@ -1,8 +1,7 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {Person} from "../../../entities/Person";
 import {PersonService} from "../../../services/person.service";
 import {HttpErrorResponse} from "@angular/common/http";
-
 
 const emptyPerson: Person = {
   svnr: '',
@@ -13,10 +12,9 @@ const emptyPerson: Person = {
   email: '',
   phoneNr: '',
   streetAndDoorNr: '',
-  postalCode: 1010,
+  postalCode: 1000,
   city: ''
 }
-
 
 @Component({
   selector: 'app-provide-personal-info',
@@ -56,7 +54,6 @@ export class ProvidePersonalInfoComponent {
 
 
   getErrorDetails(error: HttpErrorResponse) {
-    const reg = new RegExp('^[0-9]+$');
     if (this.person.svnr.length != 10 || !(this.person.svnr.match(/^[0-9]*$/))) {
       this.errorMessage = 'Die Sozialversicherungsnummer ist ungültig';
     } else if (error.status == 400) {
