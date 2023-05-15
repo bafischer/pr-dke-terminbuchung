@@ -1,0 +1,29 @@
+<h2>Personen Übersicht</h2>
+
+<p-table [value]="people" [tableStyle]="{'min-width': '50rem'}">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>SVNR</th>
+      <th>Vorname</th>
+      <th>Nachname</th>
+      <th>Geburtsdatum</th>
+      <th>Bezirk</th>
+      <th>E-Mail</th>
+      <th>PLZ</th>
+      <th>Ort</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-person>
+    <tr>
+      <td>{{person.svnr}}</td>
+      <td>{{person.firstName}}</td>
+      <td>{{person.lastName}}</td>
+      <td>{{person.birthday}}</td>
+      <td>{{person.county}}</td>
+      <td>{{person.email}}</td>
+      <td>{{person.postalCode}}</td>
+      <td>{{person.city}}</td>
+    </tr>
+  </ng-template>
+</p-table>
+
