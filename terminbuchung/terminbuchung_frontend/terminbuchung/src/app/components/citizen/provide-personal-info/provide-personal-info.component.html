@@ -89,11 +89,22 @@
 
 <h2>2) Termin buchen </h2>
 <div class="p-fluid grid">
+
   <div class="field col-12 md:col-4">
     <span class="p-float-label p-input-icon-left">
-         <button pButton id = "btn1" type="button" label="Termin für Impfung buchen" (click)="savePerson()"
+         <button pButton id = "btn1" type="button" label="Termin für Impfung buchen" (click)="savePersonVacc()"
                  class="p-button-info"></button>
-              <div *ngIf="errorMessage != ''" class="alert alert-warning">
+              <div *ngIf="errorMessage == 'ok' && !this.wantsMedication" class="alert alert-success">
+                <p-dialog [closable]=false header="Info"  [(visible)]="visible" [style]="{width: '30vw'}">
+                    Sie werden zur Terminauswahl weitergeleitet.
+                  <br>
+                  <br>
+                  <button pButton type="button" label = "OK" (click)="shouldOpenBookVacc()" class="p-button-success"></button>
+
+                </p-dialog>
+                <div *ngIf="this.shouldOpenVacc"><app-book-for-vacc></app-book-for-vacc></div>
+              </div>
+                    <div *ngIf="errorMessage != 'ok' && errorMessage != '' && !this.wantsMedication" class="alert alert-warning">
                 <p-dialog [closable]=false header="Fehler!"  [(visible)]="visible" [style]="{width: '30vw'}">
                     {{errorMessage}}
                   <br>
@@ -101,23 +112,51 @@
                   <button pButton type="button" label = "OK" (click)="refresh()" class="p-button-danger"></button>
                 </p-dialog>
               </div>
-              <div *ngIf="errorMessage == 'ok'" class="alert alert-success">
-                <p-dialog [closable]=false header="Info"  [(visible)]="visible" [style]="{width: '30vw'}">
-                    Ihre Daten wurden erfasst
-                  <br>
-                  <br>
-                  <button pButton type="button" label = "OK" (click)="refresh()" class="p-button-success"></button>
-                </p-dialog>
-              </div>
+
 
              </span>
   </div>
   <div class="field col-12 md:col-4">
     <span class="p-float-label p-input-icon-left">
-         <button pButton id ="btn2" type="button" label="Termin für Medikamentenverabreichung buchen" (click)="savePerson()"
+         <button pButton id ="btn2" type="button"
+                 label="Termin für Medikamentenverabreichung buchen" (click)="getSickInformation()"
                  class="p-button-info"></button>
+
        </span>
   </div>
+
+  <div *ngIf="this.wantsMedication && medicationCondFullfilled && errorMessageMedication == 'ok'
+        && errorMessage == 'ok'" class="alert alert-success">
+    <p-dialog [closable]=false header="Info"  [(visible)]="visible" [style]="{width: '30vw'}">
+      Sie erfüllen die nötigen Voraussetzungen. <br /> Sie werden zur Terminauswahl weitergeleitet.
+      <br>
+      <br>
+      <button pButton type="button" label = "OK" (click)="refresh()"
+              class="p-button-success"></button>
+    </p-dialog>
+  </div>
+
+  <div *ngIf="this.wantsMedication && !medicationCondFullfilled && errorMessageMedication != '' && errorMessage == ''"
+        class="alert alert-warning">
+    <p-dialog [closable]=false header="Fehler!"  [(visible)]="visible" [style]="{width: '30vw'}">
+      {{errorMessageMedication}}
+      <br>
+      <br>
+      <button pButton type="button" label = "OK" (click)="refresh()" class="p-button-danger"></button>
+    </p-dialog>
+  </div>
+
+  <div *ngIf="this.wantsMedication && medicationCondFullfilled && errorMessageMedication == 'ok' && errorMessage != 'ok'
+       && errorMessage != ''"
+       class="alert alert-warning">
+    <p-dialog [closable]=false header="Fehler!"  [(visible)]="visible" [style]="{width: '30vw'}">
+      {{errorMessage}}
+      <br>
+      <br>
+      <button pButton type="button" label = "OK" (click)="refresh()" class="p-button-danger"></button>
+    </p-dialog>
+  </div>
+
 </div>
 
 

@@ -23,6 +23,7 @@ import {SelectButtonModule} from "primeng/selectbutton";
 import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
 import {ListPersonComponent} from "./components/citizen/list-person/list-person.component";
+import { BookForVaccComponent } from './components/citizen/book-for-vacc/book-for-vacc.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import {ListPersonComponent} from "./components/citizen/list-person/list-person.
     AppComponent,
     ProvidePersonalInfoComponent,
     ListPersonComponent,
+    BookForVaccComponent,
   ],
     imports: [
         BrowserModule,
