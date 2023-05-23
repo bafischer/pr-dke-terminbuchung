@@ -120,10 +120,16 @@ export class ProvidePersonalInfoComponent {
     window.location.reload();
   }
 
-  shouldOpenBookVacc() {
+   shouldOpenBookVacc() {
     this.shouldOpenVacc = true;
-    this.router.navigate(['Termin-Impfung'])
+    this.router.navigate(['Terminbuchung-Impfung', {data: this.person.svnr}]);
+    console.log(this.person.county);
+
   }
+
+
+
+
 
 
 

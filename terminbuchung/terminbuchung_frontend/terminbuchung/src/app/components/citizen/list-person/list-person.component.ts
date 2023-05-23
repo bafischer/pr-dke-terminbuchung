@@ -21,9 +21,6 @@ export class ListPersonComponent {
     })
   }
 
-  ngOnChanges() {
-    //Write your code here
-    console.log(this.people);
-  }
+
 
 }

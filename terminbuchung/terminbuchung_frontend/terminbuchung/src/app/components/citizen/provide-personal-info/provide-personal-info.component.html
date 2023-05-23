@@ -1,4 +1,4 @@
-<h1>Terminbuchung für Impfung/Verabreichung von Medikamenten in OÖ</h1>
+<h1 >Terminbuchung für Impfung/Verabreichung von Medikamenten in OÖ</h1>
 <br>
 <h2>1) Eingabe Ihrer persönlichen Daten</h2>
 <h3>Allgemeine Daten</h3>
@@ -96,13 +96,13 @@
                  class="p-button-info"></button>
               <div *ngIf="errorMessage == 'ok' && !this.wantsMedication" class="alert alert-success">
                 <p-dialog [closable]=false header="Info"  [(visible)]="visible" [style]="{width: '30vw'}">
-                    Sie werden zur Terminauswahl weitergeleitet.
+                    Ihre Daten wurden gespeichert. <br> Sie werden zur Terminauswahl weitergeleitet.
                   <br>
                   <br>
                   <button pButton type="button" label = "OK" (click)="shouldOpenBookVacc()" class="p-button-success"></button>
 
                 </p-dialog>
-                <div *ngIf="this.shouldOpenVacc"><app-book-for-vacc></app-book-for-vacc></div>
+
               </div>
                     <div *ngIf="errorMessage != 'ok' && errorMessage != '' && !this.wantsMedication" class="alert alert-warning">
                 <p-dialog [closable]=false header="Fehler!"  [(visible)]="visible" [style]="{width: '30vw'}">
@@ -158,8 +158,6 @@
   </div>
 
 </div>
-
-
 
 
 

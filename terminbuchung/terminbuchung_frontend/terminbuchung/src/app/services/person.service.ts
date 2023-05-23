@@ -30,6 +30,10 @@ export class PersonService {
       (this.urlContactTracing + 'person/'+ svnr + '/sickinformation');
   }
 
+  public getPersonBySvnr(svnr: string): Observable<Person> {
+    return this.http.get<Person>(this.baseurl + 'persons/'+ svnr);
+  }
+
   public checkConditionMedic(sickInfo: SickInformation, errorMessageMedication: String): boolean {
     let medicationCondFullfilled: boolean = false;
     if (errorMessageMedication == "ok" && sickInfo.covidTestDate != null &&

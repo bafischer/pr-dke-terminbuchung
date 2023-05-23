@@ -6,8 +6,8 @@ import {BookForVaccComponent} from "./components/citizen/book-for-vacc/book-for-
 
 
 const routes: Routes = [
-  {path: 'Terminbuchung', component: ProvidePersonalInfoComponent},
-  {path: 'Termin-Impfung', component: BookForVaccComponent},
+  {path: 'Dateneingabe', component: ProvidePersonalInfoComponent},
+  {path: 'Terminbuchung-Impfung', component: BookForVaccComponent},
   {path: '**', component: ProvidePersonalInfoComponent},
 
 

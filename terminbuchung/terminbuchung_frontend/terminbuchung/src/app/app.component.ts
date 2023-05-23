@@ -16,7 +16,7 @@ export class AppComponent {
 
   ngOnInit() {
     console.log('test');
-     this.router.navigate(['Terminbuchung']);
+     this.router.navigate(['Dateneingabe']);
   }
 
 }
