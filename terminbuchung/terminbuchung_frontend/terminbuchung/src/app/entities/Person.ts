@@ -1,4 +1,4 @@
-import {SickInformation} from "./SickInformation";
+
 
 
 export type Person = {

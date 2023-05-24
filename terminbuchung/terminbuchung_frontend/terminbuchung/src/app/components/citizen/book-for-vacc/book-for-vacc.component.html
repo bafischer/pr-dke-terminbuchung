@@ -1,5 +1,48 @@
-<h1 > Terminbuchung für Impfung</h1>
+<h1 class = bg-primary> Terminbuchung für Impfung (Wohnsitz-Bezirk = {{this.personVaccination.county}})</h1>
 <br>
-<h3 class = "text-blue-500"> Wohnsitz-Bezirk: {{this.personVaccination.county}} </h3>
+<h3>1) Standort wählen:</h3>
+<div class="p-fluid grid">
+  <div class="field col-12 md:col-4">
+     <span class="p-0">
+        <p-dropdown placeholder="Wählen Sie den Standort" [options]='this.locNameAvailable'
+                    [(ngModel)]="locNameChoosen" (onChange)="getDatesAvailable()" >
+
+        </p-dropdown>
+        </span>
+  </div>
+</div>
+<h3>2) Tag wählen:</h3>
+<div class="p-fluid grid">
+  <div class="field col-12 md:col-4">
+     <span class="p-0">
+        <p-dropdown placeholder="Wählen Sie den Tag" [options]='this.datesFree'
+                    [(ngModel)]="this.dateChoosen" (onChange)="getTimesAvailable()">
+       <!--(onChange)= -->
+        </p-dropdown>
+        </span>
+  </div>
+</div>
+<h3>3) Uhrzeit wählen:</h3>
+<div class="p-fluid grid">
+  <div class="field col-12 md:col-4">
+     <span class="p-0">
+        <p-dropdown placeholder="Wählen Sie die Uhrzeit" [options]='this.timeFree'
+                    [(ngModel)]="this.timeChoosen" (onChange)="getSubstancesAvailable()">
+        </p-dropdown>
+        </span>
+  </div>
+</div>
+
+<h3>4) Impfstoff wählen:</h3>
+<div class="p-fluid grid">
+  <div class="field col-12 md:col-4">
+     <span class="p-0">
+        <p-dropdown placeholder="Wählen Sie den Impfstoff" [options]='this.substAvail'
+                    [(ngModel)]="substChoosen" >
+        </p-dropdown>
+        </span>
+  </div>
+</div>
+
 
 

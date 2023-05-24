@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {catchError, Observable, throwError} from "rxjs";
+import {Observable} from "rxjs";
 import {Person} from "../entities/Person";
 import {SickInformation} from "../entities/SickInformation";
 
@@ -16,7 +16,9 @@ export class PersonService {
   private readonly urlContactTracing = 'http://localhost:9191/';
 
   constructor(private http: HttpClient) {
-  }  public getPeople():Observable<Person[]> {
+  }
+
+  public getPeople():Observable<Person[]> {
 
     return this.http.get<Person[]>(this.baseurl + 'persons');
   }

@@ -19,6 +19,7 @@ const emptyPerson: Person = {
 }
 
 const emptySickInfo: SickInformation = {
+  id: 0,
   symptoms: false,
   sick: false,
   symptomStartingDate: new Date("1900-01-01"),

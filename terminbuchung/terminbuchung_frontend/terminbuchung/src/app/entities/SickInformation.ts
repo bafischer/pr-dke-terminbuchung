@@ -1,4 +1,6 @@
 export type SickInformation = {
+
+  id: number;
   symptoms: boolean;
   sick: boolean;
   symptomStartingDate?: Date;

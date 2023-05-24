@@ -93,7 +93,7 @@
   <div class="field col-12 md:col-4">
     <span class="p-float-label p-input-icon-left">
          <button pButton id = "btn1" type="button" label="Termin für Impfung buchen" (click)="savePersonVacc()"
-                 class="p-button-info"></button>
+                 class="p-button-success"></button>
               <div *ngIf="errorMessage == 'ok' && !this.wantsMedication" class="alert alert-success">
                 <p-dialog [closable]=false header="Info"  [(visible)]="visible" [style]="{width: '30vw'}">
                     Ihre Daten wurden gespeichert. <br> Sie werden zur Terminauswahl weitergeleitet.
@@ -120,7 +120,7 @@
     <span class="p-float-label p-input-icon-left">
          <button pButton id ="btn2" type="button"
                  label="Termin für Medikamentenverabreichung buchen" (click)="getSickInformation()"
-                 class="p-button-info"></button>
+                 class="p-button-success"></button>
 
        </span>
   </div>
