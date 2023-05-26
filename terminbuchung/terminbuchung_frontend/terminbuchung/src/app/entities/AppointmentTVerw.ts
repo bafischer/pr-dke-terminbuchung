@@ -1,5 +1,5 @@
 
-export type FreeAppointments = {
+export type AppointmentTVerw = {
   id: number;
   startDate: string;
   duration: string;

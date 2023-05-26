@@ -1,12 +1,7 @@
 package dke.terminbuchung.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Entity
 @Table (name = "BookedAppointments")
@@ -17,11 +12,8 @@ public class BookedAppointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookedAppointmentID;
 
-    @Column(columnDefinition = "DATE")
-    private LocalDate date;
 
-    @Column(columnDefinition = "TIME")
-    private LocalTime startTime;
+    private String date;
 
 
     @ManyToOne(cascade = CascadeType.MERGE)
@@ -32,18 +24,28 @@ public class BookedAppointment {
 
     private int line;
 
-
     private String reason;
 
-    private LocalDateTime bookedAt;
+    private String article;
 
-    public LocalTime getStartTime() {
-        return startTime;
+
+    public BookedAppointment() {};
+
+    public BookedAppointment(String date, Person person, String nameLocation, int line, String reason,
+                             String article) {
+        this.date = date;
+        this.person = person;
+        this.nameLocation = nameLocation;
+        this.line = line;
+        this.reason = reason;
+        this.article = article;
+
+
     }
 
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
+
+
+
 
     public Person getPerson() {
         return person;
@@ -77,21 +79,16 @@ public class BookedAppointment {
         this.reason = reason;
     }
 
-    public LocalDateTime getBookedAt() {
-        return bookedAt;
-    }
-
-    public void setBookedAt(LocalDateTime bookedAt) {
-        this.bookedAt = bookedAt;
-    }
 
 
 
-    public LocalDate getDate() {
+
+
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -101,5 +98,13 @@ public class BookedAppointment {
 
     public Long getBookedAppointmentID() {
         return bookedAppointmentID;
+    }
+
+    public String getArticle() {
+        return article;
+    }
+
+    public void setArticle(String article) {
+        this.article = article;
     }
 }

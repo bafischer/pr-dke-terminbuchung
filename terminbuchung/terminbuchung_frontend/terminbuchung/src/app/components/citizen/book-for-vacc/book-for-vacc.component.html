@@ -1,4 +1,4 @@
-<h1 class = bg-primary> Terminbuchung für Impfung (Wohnsitz-Bezirk = {{this.personVaccination.county}})</h1>
+<h1 > Terminbuchung für Impfung (Wohnsitz-Bezirk = {{this.personVaccination.county}})</h1>
 <br>
 <h3>1) Standort wählen:</h3>
 <div class="p-fluid grid">
@@ -37,12 +37,44 @@
 <div class="p-fluid grid">
   <div class="field col-12 md:col-4">
      <span class="p-0">
-        <p-dropdown placeholder="Wählen Sie den Impfstoff" [options]='this.substAvail'
+        <p-dropdown placeholder="Wählen Sie den Impfstoff" [options]='this.substAvailAgeChecked'
                     [(ngModel)]="substChoosen" >
         </p-dropdown>
         </span>
   </div>
 </div>
+
+<div class="p-fluid grid">
+<div class="field col-12 md:col-4">
+    <span class="p-float-label p-input-icon-left">
+         <button pButton id = "btn1" type="button" label="Termin buchen" (click)="saveApp()"
+                 class="p-button-info"></button>
+       <div *ngIf="errorMessage == 'ok' " class="alert alert-success">
+                <p-dialog [closable]=false header="Info"  [(visible)]="visible"  [style]="{width: '30vw'}">
+                    Ihr Termin wurde erfolgreich gespeichert.
+                  <br>
+                  <br>
+                  <button pButton type="button" label = "OK"  class="p-button-success"></button>
+
+                </p-dialog>
+
+              </div>
+                    <div *ngIf="errorMessage != 'ok' && errorMessage != '' " class="alert alert-warning">
+                <p-dialog [closable]=false header="Fehler!"  [style]="{width: '30vw'}">
+                    {{errorMessage}}
+                  <br>
+                  <br>
+                  <button pButton type="button" label = "OK"  class="p-button-danger"></button>
+                </p-dialog>
+              </div>
+
+
+
+
+             </span>
+</div>
+</div>
+
 
 
 

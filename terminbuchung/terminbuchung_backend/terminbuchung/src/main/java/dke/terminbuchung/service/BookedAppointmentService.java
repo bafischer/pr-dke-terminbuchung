@@ -3,7 +3,7 @@ package dke.terminbuchung.service;
 import dke.terminbuchung.entity.BookedAppointment;
 import dke.terminbuchung.entity.Person;
 import dke.terminbuchung.repository.BookedAppointmentRepository;
-import org.springdoc.api.OpenApiResourceNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import dke.terminbuchung.specification.BookedAppointmentSpecification;
@@ -11,8 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,12 +37,12 @@ public class BookedAppointmentService {
     }
 
     public BookedAppointment getBookedAppByLocationLineDateTime(String nameLocation, int line,
-                                                                LocalDate date, LocalTime startTime) {
-        Optional<BookedAppointment> c = repository.findBookedAppointmentByNameLocationAndLineAndDateAndStartTime
-                (nameLocation, line, date, startTime);
+                                                                String date) {
+        Optional<BookedAppointment> c = repository.findBookedAppointmentByNameLocationAndLineAndDate(
+                nameLocation, line, date);
         if (c.isPresent()) {
-            return repository.findBookedAppointmentByNameLocationAndLineAndDateAndStartTime
-                    (nameLocation, line, date, startTime).orElse(null);
+            return repository.findBookedAppointmentByNameLocationAndLineAndDate
+                    (nameLocation, line, date).orElse(null);
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This booked appointment does not exists.");
         }
@@ -97,13 +96,12 @@ public class BookedAppointmentService {
 
     }
 
-    public BookedAppointment saveNewBookedApp(BookedAppointment bookedApp)  {
-        Optional<BookedAppointment> p = repository.
-                findBookedAppointmentByNameLocationAndLineAndDateAndStartTime(
+    public BookedAppointment saveNewBookedApp(BookedAppointment bookedApp) {
+        /*Optional<BookedAppointment> p = repository.
+                findBookedAppointmentByNameLocationAndLineAndDate(
                         bookedApp.getNameLocation(), bookedApp.getLine(),
-                        bookedApp.getDate(), bookedApp.getStartTime()
+                        bookedApp.getDate()
                 );
-
         if (!REASONS_VALID.contains(bookedApp.getReason())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Reason-name");
         } else {
@@ -112,8 +110,10 @@ public class BookedAppointmentService {
             } else {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"This booked appointment does already exist");
             }
-        }
+        } */
+        return repository.save(bookedApp);
     }
+
 
 
 
