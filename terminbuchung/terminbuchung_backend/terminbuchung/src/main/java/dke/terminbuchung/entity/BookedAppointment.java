@@ -28,17 +28,24 @@ public class BookedAppointment {
 
     private String article;
 
+    private int idTerminverw;
+
+    private boolean deleted;
+
+
 
     public BookedAppointment() {};
 
     public BookedAppointment(String date, Person person, String nameLocation, int line, String reason,
-                             String article) {
+                             String article, int idTerminverw, boolean deleted) {
         this.date = date;
         this.person = person;
         this.nameLocation = nameLocation;
         this.line = line;
         this.reason = reason;
         this.article = article;
+        this.idTerminverw = idTerminverw;
+        this.deleted = deleted;
 
 
     }
@@ -79,11 +86,6 @@ public class BookedAppointment {
         this.reason = reason;
     }
 
-
-
-
-
-
     public String getDate() {
         return date;
     }
@@ -106,5 +108,21 @@ public class BookedAppointment {
 
     public void setArticle(String article) {
         this.article = article;
+    }
+
+    public int getIdTerminverw() {
+        return idTerminverw;
+    }
+
+    public void setIdTerminverw(int idTerminverw) {
+        this.idTerminverw = idTerminverw;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

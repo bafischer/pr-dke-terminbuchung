@@ -4,9 +4,11 @@ import dke.terminbuchung.entity.BookedAppointment;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public interface BookedAppointmentRepository extends JpaRepository<BookedAppointment, Integer>,
         JpaSpecificationExecutor<BookedAppointment> {
 
@@ -15,5 +17,6 @@ public interface BookedAppointmentRepository extends JpaRepository<BookedAppoint
 
     Optional<BookedAppointment> findBookedAppointmentByNameLocation
             (String nameLocation);
+
 
 }

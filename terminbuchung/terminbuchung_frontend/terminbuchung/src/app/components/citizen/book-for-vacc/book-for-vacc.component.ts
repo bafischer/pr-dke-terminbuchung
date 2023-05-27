@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Person} from "../../../entities/Person";
 import {PersonService} from "../../../services/person.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Location} from "../../../entities/Location";
 import {LocationService} from "../../../services/location.service";
@@ -30,7 +30,8 @@ const emptyAppTB: AppointmentTBuch = {
   line: 0,
   reason: 'Vaccine',
   article: '',
-
+  idTerminverw: 0,
+  deleted: false
 }
 
 @Component({
@@ -73,8 +74,11 @@ export class BookForVaccComponent {
 
   public visible: boolean = true;
 
+  public shouldOpenStart: boolean = false;
+
   constructor(private personService: PersonService, private locService: LocationService,
-              private route: ActivatedRoute, private appService: AppointmentService) {
+              private route: ActivatedRoute, private appService: AppointmentService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -259,6 +263,11 @@ export class BookForVaccComponent {
         for (var subst of freeApp.substance) {
           if (subst == this.substChoosen) {
             lineAvail[i] = freeApp.line;
+            if (i == 0) {
+              this.appToPost.idTerminverw = freeApp.id;
+              console.log('idTVerwaltung:', freeApp.id);
+              console.log('idTBuchungTVerw:', this.appToPost.idTerminverw);
+            }
             i++;
           }
         }
@@ -267,6 +276,7 @@ export class BookForVaccComponent {
     if (lineAvail[0] != null) {
       this.appToPost.line = lineAvail[0];
     }
+
     console.log('appToPost:', this.appToPost);
     this.appService.addApp(this.appToPost).subscribe((newApp) => {
         this.errorMessage = "ok";
@@ -274,7 +284,22 @@ export class BookForVaccComponent {
       (error: HttpErrorResponse) => {                            //Error callback
         this.errorMessage = "Es ist ein Fehler aufgetreten.";
       });
+    this.appService.addAppTVerw(this.appToPost.idTerminverw).subscribe((newApp) => {
+        this.errorMessage = "ok";
+      },
+      (error: HttpErrorResponse) => {                            //Error callback
+        this.errorMessage = "Es ist ein Fehler aufgetreten.";
+      });
 
+
+
+
+  }
+
+  shouldOpenStartTab() {
+    this.shouldOpenStart = true;
+    window.location.reload();
+    this.router.navigate(['Dateneingabe']);
 
 
   }

@@ -31,6 +31,12 @@ export class AppointmentService {
     return this.http.post<AppointmentTBuch>(this.baseUrl + 'booked-appointments', appToPost);
   }
 
+  public addAppTVerw(id: number): Observable<AppointmentTVerw> {
+    // @ts-ignore
+    return this.http.post<AppointmentTVerw>(this.urlLocationManagement + 'appointment/' + id);
+
+  }
+
 
 
 

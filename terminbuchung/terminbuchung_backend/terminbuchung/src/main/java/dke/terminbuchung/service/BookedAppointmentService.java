@@ -75,7 +75,7 @@ public class BookedAppointmentService {
                         isDupl = true;
                     }
                 }
-                if (!isDupl && a.getReason().equals("medication")) {
+                if (!isDupl && a.getReason().equals("medication") && !a.isDeleted()) {
                     bookedAppCountyWoDupl.add(a);
                 }
                 isDupl = false;
