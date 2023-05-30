@@ -3,6 +3,7 @@ package dke.terminbuchung.entity;
 import jakarta.persistence.*;
 
 
+
 @Entity
 @Table (name = "BookedAppointments")
 public class BookedAppointment {
@@ -34,7 +35,7 @@ public class BookedAppointment {
 
 
 
-    public BookedAppointment() {};
+    public BookedAppointment() {}
 
     public BookedAppointment(String date, Person person, String nameLocation, int line, String reason,
                              String article, int idTerminverw, boolean deleted) {

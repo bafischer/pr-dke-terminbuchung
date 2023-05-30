@@ -24,6 +24,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
 import {ListPersonComponent} from "./components/citizen/list-person/list-person.component";
 import { BookForVaccComponent } from './components/citizen/book-for-vacc/book-for-vacc.component';
+import { BookForMedicComponent } from './components/citizen/book-for-medic/book-for-medic.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { BookForVaccComponent } from './components/citizen/book-for-vacc/book-fo
     ProvidePersonalInfoComponent,
     ListPersonComponent,
     BookForVaccComponent,
+    BookForMedicComponent,
   ],
     imports: [
         BrowserModule,

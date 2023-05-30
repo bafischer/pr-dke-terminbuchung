@@ -10,6 +10,7 @@ import dke.terminbuchung.specification.BookedAppointmentSpecification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import org.webjars.NotFoundException;
 
 
 import java.util.ArrayList;
@@ -86,18 +87,20 @@ public class BookedAppointmentService {
     }
 
     public String deleteBookedApp(int id) {
-        Optional<BookedAppointment> c = repository.findById(id);
-        if (c.isPresent()) {
-            repository.deleteById(id);
-            return "Booked appointment deleted: " + id;
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This id does not exist.");
+
+        BookedAppointment b = repository.findBookedAppointmentByIdTerminverw(id).orElseThrow(()
+                -> new NotFoundException("Die übermittelte ID existiert nicht"));
+        if (!b.isDeleted()) {
+            b.setDeleted(true);
+            repository.save(b);
+            return id + " wurde auf deleted gesetzt";
         }
+        return "";
 
     }
 
     public BookedAppointment saveNewBookedApp(BookedAppointment bookedApp) {
-        /*Optional<BookedAppointment> p = repository.
+        Optional<BookedAppointment> p = repository.
                 findBookedAppointmentByNameLocationAndLineAndDate(
                         bookedApp.getNameLocation(), bookedApp.getLine(),
                         bookedApp.getDate()
@@ -110,8 +113,8 @@ public class BookedAppointmentService {
             } else {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"This booked appointment does already exist");
             }
-        } */
-        return repository.save(bookedApp);
+        }
+
     }
 
 

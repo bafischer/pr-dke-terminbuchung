@@ -4,23 +4,23 @@
 <h3>Allgemeine Daten</h3>
 <div class="p-fluid grid">
   <div class="field col-12 md:col-4">
-        <span class="p-float-label p-input-icon-left">
-          <i class="pi pi-user"></i>
+        <span class="p-float-label ">
+          <!--<i class="pi pi-user"></i> -->
             <input type="text" id="svnr" pInputText [(ngModel)]="person.svnr">
             <label for="svnr">Sozialversicherungs-Nr. (10stellig, inkl. Geburtsdatum TTMMJJ)</label>
         </span>
   </div>
 
   <div class="field col-12 md:col-4">
-        <span class="p-float-label p-input-icon-left">
-          <i class="pi pi-user"></i>
+        <span class="p-float-label " >
+           <!--<i class="pi pi-user"></i> -->
             <input type="text" id="firstName" pInputText [(ngModel)]="person.firstName">
             <label for="firstName">Vorname</label>
         </span>
   </div>
   <div class="field col-12 md:col-4">
-        <span class="p-float-label p-input-icon-left">
-          <i class="pi pi-user"></i>
+         <span class="p-float-label " >
+           <!--<i class="pi pi-user"></i> -->
             <input type="text" id="lastName" pInputText [(ngModel)]="person.lastName">
             <label for="lastName">Nachname</label>
         </span>
@@ -28,24 +28,24 @@
 
 
   <div class="field col-12 md:col-4">
-     <span class="p-float-label p-input-icon-left">
-          <i class="pi pi-user"></i>
+   <span class="p-float-label " >
+           <!--<i class="pi pi-user"></i> -->
             <p-calendar  id="calendar"  dateFormat="dd/mm/yy" [(ngModel)]="person.birthday"></p-calendar>
             <label for="calendar">Geburtsdatum</label>
         </span>
   </div>
 
   <div class="field col-12 md:col-4">
-        <span class="p-float-label p-input-icon-left">
-          <i class="pi pi-user"></i>
+    <span class="p-float-label " >
+           <!--<i class="pi pi-user"></i> -->
             <input type="text" id="email" pInputText [(ngModel)]="person.email">
             <label for="email">Email</label>
         </span>
   </div>
 
   <div class="field col-12 md:col-4">
-        <span class="p-float-label p-input-icon-left">
-          <i class="pi pi-user"></i>
+  <span class="p-float-label " >
+           <!--<i class="pi pi-user"></i> -->
             <input type="text" id="telefonnummer" pInputText [(ngModel)]="person.phoneNr" >
             <label for="telefonnummer">Telefonnummer, zB 0664/2815987</label>
         </span>
@@ -56,23 +56,23 @@
 
 <div class="p-fluid grid">
   <div class="field col-12 md:col-4">
-        <span class="p-float-label p-input-icon-left">
-            <i class="pi pi-home"></i>
+  <span class="p-float-label " >
+           <!--<i class="pi pi-home"></i> -->
             <input type="text" id="streetAndDoor" pInputText [(ngModel)]="person.streetAndDoorNr">
             <label for="streetAndDoor">Straße und Hausnummer</label>
         </span>
   </div>
   <div class="field col-12 md:col-4">
-        <span class="p-float-label p-input-icon-left">
-            <i class="pi pi-home"></i>
+  <span class="p-float-label " >
+           <!--<i class="pi pi-user"></i> -->
             <input type="text" id="postalCode" pInputText [(ngModel)]="person.postalCode">
             <label for="postalCode">Postleitzahl</label>
         </span>
   </div>
 
   <div class="field col-12 md:col-4">
-        <span class="p-float-label p-input-icon-left">
-            <i class="pi pi-home"></i>
+  <span class="p-float-label " >
+           <!--<i class="pi pi-user"></i> -->
             <input type="text" id="city" pInputText [(ngModel)]="person.city">
             <label for="city">Ort</label>
         </span>
@@ -131,13 +131,15 @@
       Sie erfüllen die nötigen Voraussetzungen. <br /> Sie werden zur Terminauswahl weitergeleitet.
       <br>
       <br>
-      <button pButton type="button" label = "OK" (click)="refresh()"
+      <button pButton type="button" label = "OK" (click)="shouldOpenBookMedic()"
               class="p-button-success"></button>
     </p-dialog>
   </div>
 
-  <div *ngIf="this.wantsMedication && !medicationCondFullfilled && errorMessageMedication != '' && errorMessage == ''"
-        class="alert alert-warning">
+  <!--
+
+  <div *ngIf="this.wantsMedication && !medicationCondFullfilled && errorMessageMedication != ''
+        && errorMessage == ''" class="alert alert-warning">
     <p-dialog [closable]=false header="Fehler!"  [(visible)]="visible" [style]="{width: '30vw'}">
       {{errorMessageMedication}}
       <br>
@@ -146,11 +148,31 @@
     </p-dialog>
   </div>
 
-  <div *ngIf="this.wantsMedication && medicationCondFullfilled && errorMessageMedication == 'ok' && errorMessage != 'ok'
-       && errorMessage != ''"
+  <div *ngIf="this.wantsMedication && medicationCondFullfilled && errorMessageMedication == 'ok'
+            && errorMessage != 'ok' && errorMessage != ''"
        class="alert alert-warning">
     <p-dialog [closable]=false header="Fehler!"  [(visible)]="visible" [style]="{width: '30vw'}">
       {{errorMessage}}
+      <br>
+      <br>
+      <button pButton type="button" label = "OK" (click)="refresh()" class="p-button-danger"></button>
+    </p-dialog>
+  </div>   -->
+
+
+  <div *ngIf=" this.wantsMedication && errorMessage != 'ok' && errorMessage != '' " class="alert alert-warning">
+    <p-dialog [closable]=false header="Fehler!"  [(visible)]="visible" [style]="{width: '30vw'}">
+      {{errorMessage}}
+      <br>
+      <br>
+      <button pButton type="button" label = "OK" (click)="refresh()" class="p-button-danger"></button>
+    </p-dialog>
+  </div>
+
+  <div *ngIf="this.wantsMedication && errorMessageMedication != 'ok' && errorMessageMedication != ''
+            "   class="alert alert-warning">
+    <p-dialog [closable]=false header="Fehler!"  [(visible)]="visible" [style]="{width: '30vw'}">
+      {{errorMessageMedication}}
       <br>
       <br>
       <button pButton type="button" label = "OK" (click)="refresh()" class="p-button-danger"></button>

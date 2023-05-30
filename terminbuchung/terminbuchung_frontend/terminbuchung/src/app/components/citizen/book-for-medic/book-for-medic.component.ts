@@ -28,22 +28,21 @@ const emptyAppTB: AppointmentTBuch = {
   person: emptyPerson,
   nameLocation: '',
   line: 0,
-  reason: 'vaccination',
+  reason: 'medication',
   article: '',
   idTerminverw: 0,
   deleted: false
 }
-
 @Component({
-  selector: 'app-book-for-vacc',
-  templateUrl: './book-for-vacc.component.html',
-  styleUrls: ['./book-for-vacc.component.scss']
+  selector: 'app-book-for-medic',
+  templateUrl: './book-for-medic.component.html',
+  styleUrls: ['./book-for-medic.component.scss']
 })
-export class BookForVaccComponent {
+export class BookForMedicComponent {
 
-  @Input() personvacc: string | null = '';
+  @Input() personmedic: string | null = '';
 
-  public personVaccination: Person = emptyPerson;
+  public personMedication: Person = emptyPerson;
 
   public errorMessagePerson: string = '';
 
@@ -83,14 +82,14 @@ export class BookForVaccComponent {
 
   ngOnInit() {
 
-    this.personvacc = this.route.snapshot.paramMap.get('data');
+    this.personmedic = this.route.snapshot.paramMap.get('data');
     this.getPerson();
   }
 
   getPerson() {
-    if (this.personvacc != null) {
-      this.personService.getPersonBySvnr(this.personvacc).subscribe((pVacc) => {
-          this.personVaccination = pVacc;
+    if (this.personmedic != null) {
+      this.personService.getPersonBySvnr(this.personmedic).subscribe((pVacc) => {
+          this.personMedication = pVacc;
           //das ist wichtig //
           this.getLocAvailable();
         },
@@ -108,14 +107,14 @@ export class BookForVaccComponent {
   }
 
   getLocAvailable() {
-    if (this.personvacc != null) {
+    if (this.personmedic != null) {
       this.locNameChoosen = '';
-      console.log('county: ', this.personVaccination.county);
-      this.locService.getLocations(this.personVaccination.county).subscribe((loc) => {
+      console.log('county: ', this.personMedication.county);
+      this.locService.getLocations(this.personMedication.county).subscribe((loc) => {
           this.locAvailable = loc;
           let i: number = 0;
           for (var Location of this.locAvailable) {
-            if (Location.type == "vaccination") {
+            if (Location.type == "medication") {
               this.locNameAvailable[i] = Location.name;
               i++;
             }
@@ -212,7 +211,6 @@ export class BookForVaccComponent {
             this.substAvail[i] = sub;
             i++;
           }
-
         }
       }
       this.substAvail = [...new Set(this.substAvail)];
@@ -224,7 +222,7 @@ export class BookForVaccComponent {
     if (this.substAvail != null) {
       this.substAvailAgeChecked = [];
       this.appService.getAllDrugs().subscribe((allDrugs) => {
-          let age: number = moment().diff(this.personVaccination.birthday, 'years');
+          let age: number = moment().diff(this.personMedication.birthday, 'years');
           console.log('age:', age);
           let i: number = 0;
           for (var drug of allDrugs) {
@@ -250,7 +248,7 @@ export class BookForVaccComponent {
   }
 
   saveApp() {
-    this.appToPost.person = this.personVaccination;
+    this.appToPost.person = this.personMedication;
     this.appToPost.nameLocation = this.locNameChoosen;
     this.appToPost.article = this.substChoosen;
     let lineAvail: number[] = [];
@@ -258,7 +256,7 @@ export class BookForVaccComponent {
     for (var freeApp of this.appFree) {
       const date = new Date(freeApp.startDate);
       if (date.toLocaleDateString() == this.dateChoosen && date.toLocaleTimeString() == this.timeChoosen
-              && freeApp.location == this.locNameChoosen) {
+        && freeApp.location == this.locNameChoosen) {
         this.appToPost.date = date.toLocaleString();
         for (var subst of freeApp.substance) {
           if (subst == this.substChoosen) {
@@ -306,13 +304,6 @@ export class BookForVaccComponent {
 
 
 }
-
-
-
-
-
-
-
 
 
 

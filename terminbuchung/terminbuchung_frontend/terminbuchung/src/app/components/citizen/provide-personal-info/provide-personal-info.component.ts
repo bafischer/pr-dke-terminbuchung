@@ -14,7 +14,7 @@ const emptyPerson: Person = {
   email: '',
   phoneNr: '',
   streetAndDoorNr: '',
-  postalCode: 1000,
+  postalCode: 4000,
   city: ''
 }
 
@@ -55,6 +55,8 @@ export class ProvidePersonalInfoComponent {
 
   public shouldOpenVacc: boolean = false;
 
+  public shouldOpenMedic: boolean = false;
+
 
   constructor(private personService: PersonService, private router: Router) {
   }
@@ -83,12 +85,15 @@ export class ProvidePersonalInfoComponent {
     this.wantsMedication = true;
     this.personService.getSickInfo(this.person.svnr).subscribe((sInfo) => {
         this.errorMessageMedication = "ok";
+        this.errorMessage = "ok";
         this.sickInfo = sInfo;
         this.checkConditionMedic();
       },
       (error: HttpErrorResponse) => {
         //Error callback
-        if (error.status === 404) {
+        if (this.person.svnr.length != 10 || !(this.person.svnr.match(/^[0-9]*$/))) {
+          this.errorMessage = 'Die Sozialversicherungsnummer ist ungültig';}
+        else if (error.status === 404) {
           this.errorMessageMedication = "Eine Person mit dieser SVNR ist nicht in der Contact-Tracing-Datenbank erfasst."
         } else {
         this.errorMessageMedication = "Es ist ein Server-Fehler aufgetreten. Bitte versuchen Sie es noch einmal."
@@ -107,6 +112,7 @@ export class ProvidePersonalInfoComponent {
   }
 
 
+
   getErrorDetails(error: HttpErrorResponse) {
     if (this.person.svnr.length != 10 || !(this.person.svnr.match(/^[0-9]*$/))) {
       this.errorMessage = 'Die Sozialversicherungsnummer ist ungültig';
@@ -117,13 +123,32 @@ export class ProvidePersonalInfoComponent {
     }
   }
 
+
+
    refresh(): void {
-    window.location.reload();
+     window.location.reload();
   }
+
+  show(): void {
+    this.visible = true;
+  }
+
+  cancel(): void {
+    this.visible = false;
+  }
+
+
 
    shouldOpenBookVacc() {
     this.shouldOpenVacc = true;
     this.router.navigate(['Terminbuchung-Impfung', {data: this.person.svnr}]);
+    console.log(this.person.county);
+
+  }
+
+  shouldOpenBookMedic() {
+    this.shouldOpenMedic = true;
+    this.router.navigate(['Terminbuchung-Medikament', {data: this.person.svnr}]);
     console.log(this.person.county);
 
   }

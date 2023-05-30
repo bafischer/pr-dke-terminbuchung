@@ -18,5 +18,12 @@ public interface BookedAppointmentRepository extends JpaRepository<BookedAppoint
     Optional<BookedAppointment> findBookedAppointmentByNameLocation
             (String nameLocation);
 
+    Optional<BookedAppointment> findBookedAppointmentByIdTerminverw
+            (int idTerminverw);
+
+
+
+
+
 
 }
