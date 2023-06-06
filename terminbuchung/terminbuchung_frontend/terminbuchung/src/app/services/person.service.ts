@@ -4,7 +4,18 @@ import {Observable} from "rxjs";
 import {Person} from "../entities/Person";
 import {SickInformation} from "../entities/SickInformation";
 
-
+const emptyPerson: Person = {
+  svnr: '',
+  firstName: '',
+  lastName: '',
+  birthday: new Date(),
+  county: '',
+  email: '',
+  phoneNr: '',
+  streetAndDoorNr: '',
+  postalCode: 4000,
+  city: ''
+}
 
 
 
@@ -18,13 +29,16 @@ export class PersonService {
   constructor(private http: HttpClient) {
   }
 
-  public getPeople():Observable<Person[]> {
+  private person: Person = emptyPerson;
 
+  public getPeople():Observable<Person[]> {
     return this.http.get<Person[]>(this.baseurl + 'persons');
   }
 
-  public addPerson(person: Person): Observable<Person> {
-    return this.http.post<Person>(this.baseurl + 'persons', person);
+
+  public addPerson(): Observable<Person> {
+    //this.person = person;
+    return this.http.post<Person>(this.baseurl + 'persons', this.person);
   }
 
   public getSickInfo(svnr: string): Observable<SickInformation> {
@@ -52,9 +66,13 @@ export class PersonService {
     return medicationCondFullfilled;
   }
 
+  public getPerson(): Person {
+    return this.person
+  }
 
-
-
+  public setPerson(p: Person) {
+    this.person = p;
+  }
 
 
 }

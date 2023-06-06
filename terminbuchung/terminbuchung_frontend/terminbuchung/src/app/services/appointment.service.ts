@@ -1,30 +1,36 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {Observable, subscribeOn} from "rxjs";
 
 import {AppointmentTVerw} from "../entities/AppointmentTVerw";
 import {Drug} from "../entities/Drug";
 
 import {AppointmentTBuch} from "../entities/AppointmentTBuch";
+import * as moment from "moment/moment";
+import {Person} from "../entities/Person";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppointmentService {
 
-  private readonly urlLocationManagement = 'http://localhost:9191/';
+
+
+  private readonly appManagementUrl = 'http://localhost:9191/';
   private readonly baseUrl = 'http://localhost:9192/';
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   public getFreeApp(locname: string): Observable<AppointmentTVerw[]> {
     return this.http.get<AppointmentTVerw[]>
-    (this.urlLocationManagement + 'locations/' + locname + '/free-appointments');
+    (this.appManagementUrl + 'locations/' + locname + '/free-appointments');
   }
 
   public getAllDrugs() : Observable<Drug[]> {
-    return this.http.get<Drug[]> (this.urlLocationManagement + 'articles');
+    return this.http.get<Drug[]> (this.appManagementUrl + 'articles');
   }
 
   public addApp(appToPost: AppointmentTBuch): Observable<AppointmentTBuch> {
@@ -33,10 +39,9 @@ export class AppointmentService {
 
   public addAppTVerw(id: number): Observable<AppointmentTVerw> {
     // @ts-ignore
-    return this.http.post<AppointmentTVerw>(this.urlLocationManagement + 'appointment/' + id);
+    return this.http.post<AppointmentTVerw>(this.appManagementUrl + 'appointment/' + id);
 
   }
-
 
 
 

@@ -61,7 +61,7 @@ export class ProvidePersonalInfoComponent {
   constructor(private personService: PersonService, private router: Router) {
   }
 
-  savePerson() {
+  /*savePerson() {
     this.personService.addPerson(this.person).subscribe((newPerson) => {
         console.log('newPerson', newPerson);
         this.errorMessage = "ok";
@@ -79,7 +79,7 @@ export class ProvidePersonalInfoComponent {
       (error: HttpErrorResponse) => {                            //Error callback
         this.getErrorDetails(error);
       });
-  }
+  } */
 
   getSickInformation() {
     this.wantsMedication = true;
@@ -98,7 +98,6 @@ export class ProvidePersonalInfoComponent {
         } else {
         this.errorMessageMedication = "Es ist ein Server-Fehler aufgetreten. Bitte versuchen Sie es noch einmal."
       }});
-
   }
 
   checkConditionMedic() {
@@ -107,22 +106,21 @@ export class ProvidePersonalInfoComponent {
           this.errorMessageMedication =
           "Die Voraussetzungen sind laut Contact-Tracing-Datenbank nicht erfüllt";
         } else {
-          this.savePerson();
+          //this.savePerson();
         }
   }
 
-
-
-  getErrorDetails(error: HttpErrorResponse) {
+  getErrorDetails() {
     if (this.person.svnr.length != 10 || !(this.person.svnr.match(/^[0-9]*$/))) {
       this.errorMessage = 'Die Sozialversicherungsnummer ist ungültig';
-    } else if (error.status === 400) {
-      this.errorMessage = 'ok';
-    } else {
+    } else if (this.person.firstName == '' || this.person.lastName == '' || this.person.email == '' ||
+      this.person.phoneNr == '' || this.person.streetAndDoorNr == '' || this.person.city == '' ||
+      this.person.postalCode == 0 || this.person.county == '') {
       this.errorMessage = "Alle Felder müssen befüllt werden";
+    } else {
+      this.errorMessage = 'ok';
     }
   }
-
 
 
    refresh(): void {
@@ -137,11 +135,12 @@ export class ProvidePersonalInfoComponent {
     this.visible = false;
   }
 
-
-
+  //sammle Personendaten und speichere sie in this.person; abschließend lege die Information
+  //in this.personService.person ab
    shouldOpenBookVacc() {
     this.shouldOpenVacc = true;
-    this.router.navigate(['Terminbuchung-Impfung', {data: this.person.svnr}]);
+    this.personService.setPerson(this.person);
+    this.router.navigate(['Terminbuchung-Impfung']);
     console.log(this.person.county);
 
   }
@@ -150,7 +149,6 @@ export class ProvidePersonalInfoComponent {
     this.shouldOpenMedic = true;
     this.router.navigate(['Terminbuchung-Medikament', {data: this.person.svnr}]);
     console.log(this.person.county);
-
   }
 
 

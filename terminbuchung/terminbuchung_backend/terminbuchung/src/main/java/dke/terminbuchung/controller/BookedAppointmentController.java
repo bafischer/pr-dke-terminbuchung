@@ -34,6 +34,7 @@ public class BookedAppointmentController {
         } else {
             return ResponseEntity.ok(service.deleteBookedApp(bookedAppIdTVerw));
         }
+
     }
 
     @GetMapping("/counties/{name-county}/nr-persons-medication")
