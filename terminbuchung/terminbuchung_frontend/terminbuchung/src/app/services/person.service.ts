@@ -30,6 +30,7 @@ export class PersonService {
   }
 
   private person: Person = emptyPerson;
+  private covidTestDate: Date | undefined = new Date();
 
   public getPeople():Observable<Person[]> {
     return this.http.get<Person[]>(this.baseurl + 'persons');
@@ -51,6 +52,7 @@ export class PersonService {
   }
 
   public checkConditionMedic(sickInfo: SickInformation, errorMessageMedication: String): boolean {
+    this.covidTestDate = sickInfo.covidTestDate;
     let medicationCondFullfilled: boolean = false;
     if (errorMessageMedication == "ok" && sickInfo.covidTestDate != null &&
       sickInfo.sick != null) {
@@ -68,6 +70,11 @@ export class PersonService {
 
   public getPerson(): Person {
     return this.person
+  }
+
+
+  getCovidTestDate(): Date | undefined {
+    return this.covidTestDate;
   }
 
   public setPerson(p: Person) {

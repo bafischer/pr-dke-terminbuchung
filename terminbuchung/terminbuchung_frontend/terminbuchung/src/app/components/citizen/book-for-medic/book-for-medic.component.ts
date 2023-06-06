@@ -94,6 +94,7 @@ export class BookForMedicComponent {
     }
   }
 
+
   getDatesAvailable() {
     if (this.locNameChoosen != null) {
       console.log('locChoosen: ', this.locNameChoosen);
@@ -106,13 +107,24 @@ export class BookForMedicComponent {
       this.appFree = [];
       this.appService.getFreeApp(this.locNameChoosen).subscribe((app) => {
           let j: number = 0;
+
+          // @ts-ignore
+          let covidTestDate = new Date(this.personService.getCovidTestDate());
+          let dateNew = new Date();
+          dateNew.setHours(23);
+          dateNew.setMinutes(59);
+          dateNew.setDate(covidTestDate.getDate() + 3);
+          console.log('dateNew:', dateNew);
           for (var appSingle of app) {
             let date1 = new Date(appSingle.startDate);
-            if (date1 > new Date()) {
+            console.log('dateFree:', date1);
+            if (date1 > new Date() && date1 <= dateNew){
               this.appFree[j] = appSingle;
               j++;
             }
           }
+
+
 
           let i: number = 0;
           let datesFreeDate: Date[] = [];
