@@ -53,9 +53,8 @@
                 <p-dialog [closable]=false header="Info"  [(visible)]="visible"  [style]="{width: '30vw'}">
                     Ihr Termin wurde erfolgreich gespeichert. <br> <br>
                     Standort: {{this.appToPost.nameLocation}} <br>
-                    Tag/Uhrzeit: {{this.appToPost.date}}<br>
+                    Tag, Uhrzeit: {{this.appToPost.date}}<br>
                     Impfstoff: {{this.appToPost.article}}
-
                   <br>
                   <br>
                   <button pButton type="button" label = "OK" (click)="shouldOpenStartTab()" class="p-button-success"></button>
@@ -75,6 +74,8 @@
              </span>
 </div>
 </div>
+
+
 
 
 

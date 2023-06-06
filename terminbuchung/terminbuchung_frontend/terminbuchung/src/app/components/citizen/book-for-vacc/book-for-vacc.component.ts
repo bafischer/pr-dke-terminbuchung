@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Person} from "../../../entities/Person";
 import {PersonService} from "../../../services/person.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import { Router} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 import * as moment from 'moment';
 
@@ -75,7 +75,7 @@ export class BookForVaccComponent {
   public shouldOpenStart: boolean = false;
 
   constructor(public personService: PersonService, private locService: LocationService,
-              private route: ActivatedRoute, private appService: AppointmentService,
+              private appService: AppointmentService,
               private router: Router) {
   }
 

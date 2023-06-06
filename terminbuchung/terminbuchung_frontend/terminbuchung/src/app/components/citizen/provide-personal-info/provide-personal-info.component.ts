@@ -87,6 +87,7 @@ export class ProvidePersonalInfoComponent {
         this.errorMessageMedication = "ok";
         this.errorMessage = "ok";
         this.sickInfo = sInfo;
+        console.log('sickInfo: ', this.sickInfo);
         this.checkConditionMedic();
       },
       (error: HttpErrorResponse) => {
@@ -102,7 +103,8 @@ export class ProvidePersonalInfoComponent {
 
   checkConditionMedic() {
       this.medicationCondFullfilled = this.personService.checkConditionMedic(this.sickInfo, this.errorMessageMedication);
-        if (!this.medicationCondFullfilled) {
+      console.log('medicationCondFulfilled: ', this.medicationCondFullfilled);
+      if (!this.medicationCondFullfilled) {
           this.errorMessageMedication =
           "Die Voraussetzungen sind laut Contact-Tracing-Datenbank nicht erfüllt";
         } else {
@@ -127,13 +129,7 @@ export class ProvidePersonalInfoComponent {
      window.location.reload();
   }
 
-  show(): void {
-    this.visible = true;
-  }
 
-  cancel(): void {
-    this.visible = false;
-  }
 
   //sammle Personendaten und speichere sie in this.person; abschließend lege die Information
   //in this.personService.person ab
@@ -147,7 +143,8 @@ export class ProvidePersonalInfoComponent {
 
   shouldOpenBookMedic() {
     this.shouldOpenMedic = true;
-    this.router.navigate(['Terminbuchung-Medikament', {data: this.person.svnr}]);
+    this.personService.setPerson(this.person);
+    this.router.navigate(['Terminbuchung-Medikament']);
     console.log(this.person.county);
   }
 

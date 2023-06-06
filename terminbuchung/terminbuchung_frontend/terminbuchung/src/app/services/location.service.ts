@@ -43,6 +43,28 @@ export class LocationService {
     return locNameAvailable;
 
   }
+
+
+  public getLocAvailableMedic(p: Person): string[] {
+    let locNameAvailable: string[] = [];
+    if (p != null) {
+      this.getLocations(p.county).subscribe((loc) => {
+          let i: number = 0;
+          for (var Location of loc) {
+            if (Location.type != "vaccination") {
+              locNameAvailable[i] = Location.name;
+              i++;
+            }
+          }
+        },
+        (error: HttpErrorResponse) => {
+
+        });
+    } else {
+    }
+    return locNameAvailable;
+
+  }
 }
 
 
