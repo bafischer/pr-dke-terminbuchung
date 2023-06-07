@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpParams} from "@angular/common/http";
 import {Observable, subscribeOn} from "rxjs";
 
 import {AppointmentTVerw} from "../entities/AppointmentTVerw";
@@ -25,9 +25,14 @@ export class AppointmentService {
   }
 
   public getFreeApp(locname: string): Observable<AppointmentTVerw[]> {
+    console.log('locname', locname);
+    const params = new HttpParams()
+      .set('location', locname);
+
     return this.http.get<AppointmentTVerw[]>
-    (this.appManagementUrl + 'locations/' + locname + '/free-appointments');
+    (this.appManagementUrl + 'free-appointments-loc', {params});
   }
+
 
   public getAllDrugs() : Observable<Drug[]> {
     return this.http.get<Drug[]> (this.appManagementUrl + 'articles');
@@ -38,8 +43,9 @@ export class AppointmentService {
   }
 
   public addAppTVerw(id: number): Observable<AppointmentTVerw> {
+
     // @ts-ignore
-    return this.http.post<AppointmentTVerw>(this.appManagementUrl + 'appointment/' + id);
+    return this.http.put<AppointmentTVerw>(this.appManagementUrl + 'appointment/' + id);
 
   }
 

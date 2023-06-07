@@ -160,7 +160,8 @@
   </div>   -->
 
 
-  <div *ngIf=" this.wantsMedication && errorMessage != 'ok' && errorMessage != '' " class="alert alert-warning">
+  <div *ngIf=" this.wantsMedication && errorMessage != 'ok' && errorMessage != ''
+            && errorMessageMedication != 'ok' " class="alert alert-warning">
     <p-dialog [closable]=false header="Fehler!"  [(visible)]="visible" [style]="{width: '30vw'}">
       {{errorMessage}}
       <br>
@@ -170,7 +171,7 @@
   </div>
 
   <div *ngIf="this.wantsMedication && errorMessageMedication != 'ok' && errorMessageMedication != ''
-            "   class="alert alert-warning">
+            && this.errorMessage == 'ok' "   class="alert alert-warning">
     <p-dialog [closable]=false header="Fehler!"  [(visible)]="visible" [style]="{width: '30vw'}">
       {{errorMessageMedication}}
       <br>
@@ -178,6 +179,17 @@
       <button pButton type="button" label = "OK" (click)="refresh()" class="p-button-danger"></button>
     </p-dialog>
   </div>
+
+  <div *ngIf="this.wantsMedication && errorMessageMedication == 'ok' && this.errorMessage != 'ok' "
+       class="alert alert-warning">
+    <p-dialog [closable]=false header="Fehler!"  [(visible)]="visible" [style]="{width: '30vw'}">
+      {{errorMessage}}
+      <br>
+      <br>
+      <button pButton type="button" label = "OK" (click)="refresh()" class="p-button-danger"></button>
+    </p-dialog>
+  </div>
+
 
 </div>
 

@@ -88,13 +88,16 @@ export class ProvidePersonalInfoComponent {
         this.errorMessage = "ok";
         this.sickInfo = sInfo;
         console.log('sickInfo: ', this.sickInfo);
+        this.getErrorDetails();
         this.checkConditionMedic();
       },
       (error: HttpErrorResponse) => {
         //Error callback
+        this.getErrorDetails();
+        console.log('errorMessage:', this.errorMessage);
         if (this.person.svnr.length != 10 || !(this.person.svnr.match(/^[0-9]*$/))) {
           this.errorMessage = 'Die Sozialversicherungsnummer ist ungültig';}
-        else if (error.status === 404) {
+        else if (error.status === 404 || error.status === 400) {
           this.errorMessageMedication = "Eine Person mit dieser SVNR ist nicht in der Contact-Tracing-Datenbank erfasst."
         } else {
         this.errorMessageMedication = "Es ist ein Server-Fehler aufgetreten. Bitte versuchen Sie es noch einmal."
@@ -115,6 +118,8 @@ export class ProvidePersonalInfoComponent {
   getErrorDetails() {
     if (this.person.svnr.length != 10 || !(this.person.svnr.match(/^[0-9]*$/))) {
       this.errorMessage = 'Die Sozialversicherungsnummer ist ungültig';
+    }  else if (!this.personService.checkSozVersPruefziffer(this.person.svnr)) {
+      this.errorMessage = 'Die Sozialversicherungsnummer (Prüfziffer) ist ungültig';
     } else if (this.person.firstName == '' || this.person.lastName == '' || this.person.email == '' ||
       this.person.phoneNr == '' || this.person.streetAndDoorNr == '' || this.person.city == '' ||
       this.person.postalCode == 0 || this.person.county == '') {

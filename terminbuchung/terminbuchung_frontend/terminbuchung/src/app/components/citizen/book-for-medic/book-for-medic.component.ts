@@ -116,7 +116,7 @@ export class BookForMedicComponent {
           dateNew.setDate(covidTestDate.getDate() + 3);
           console.log('dateNew:', dateNew);
           for (var appSingle of app) {
-            let date1 = new Date(appSingle.startDate);
+            let date1 = new Date(appSingle.date);
             console.log('dateFree:', date1);
             if (date1 > new Date() && date1 <= dateNew){
               this.appFree[j] = appSingle;
@@ -129,7 +129,7 @@ export class BookForMedicComponent {
           let i: number = 0;
           let datesFreeDate: Date[] = [];
           for (var freeApp of this.appFree) {
-            const date = new Date(freeApp.startDate);
+            const date = new Date(freeApp.date);
             datesFreeDate[i] = date;
             i++;
           }
@@ -167,7 +167,7 @@ export class BookForMedicComponent {
       let i: number = 0;
       let timeFreeDate: Date[] = [];
       for (var freeApp of this.appFree) {
-        const date = new Date(freeApp.startDate);
+        const date = new Date(freeApp.date);
         if (date.toLocaleDateString() == this.dateChoosen) {
           timeFreeDate[i] = date;
           i++;
@@ -191,13 +191,12 @@ export class BookForMedicComponent {
       this.substChoosen = '';
       let i: number = 0;
       for (var freeApp of this.appFree) {
-        const date = new Date(freeApp.startDate);
-        if (date.toLocaleDateString() == this.dateChoosen && date.toLocaleTimeString() == this.timeChoosen) {
-          for (var sub of freeApp.substance) {
-            this.substAvail[i] = sub;
-            i++;
-          }
-
+        const date = new Date(freeApp.date);
+        if (date.toLocaleDateString() == this.dateChoosen &&
+          date.toLocaleTimeString() == this.timeChoosen) {
+          this.substAvail[i] = freeApp.substance;
+          console.log('substAvail:', this.substAvail[i]);
+          i++;
         }
       }
       this.substAvail = [...new Set(this.substAvail)];
@@ -288,20 +287,20 @@ export class BookForMedicComponent {
     let lineAvail: number[] = [];
     let i: number = 0;
     for (var freeApp of this.appFree) {
-      const date = new Date(freeApp.startDate);
+      const date = new Date(freeApp.date);
       if (date.toLocaleDateString() == this.dateChoosen && date.toLocaleTimeString() == this.timeChoosen
         && freeApp.location == this.locNameChoosen) {
         this.appToPost.date = date.toLocaleString();
-        for (var subst of freeApp.substance) {
-          if (subst == this.substChoosen) {
-            lineAvail[i] = freeApp.line;
-            if (i == 0) {
-              this.appToPost.idTerminverw = freeApp.id;
-              console.log('idTVerwaltung:', freeApp.id);
-              console.log('idTBuchungTVerw:', this.appToPost.idTerminverw);
-            }
-            i++;
+        let subst: string = freeApp.substance;
+        if (subst == this.substChoosen) {
+          lineAvail[i] = freeApp.line;
+          if (i == 0) {
+            this.appToPost.idTerminverw = freeApp.id;
+            console.log('idTVerwaltung:', freeApp.id);
+            console.log('idTBuchungTVerw:', this.appToPost.idTerminverw);
+
           }
+          i++;
         }
       }
     }

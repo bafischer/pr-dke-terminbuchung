@@ -1,15 +1,19 @@
 
 export type AppointmentTVerw = {
   id: number;
-  startDate: string;
-  duration: string;
-  booked: boolean;
-
+  date: string;
+  duration: number;
   location: string;
-
   line: number;
+  booked: boolean;
+  substance: string;
+  deleted: boolean;
 
-  substance: string[];
+
+
+
+
+
 
 
 

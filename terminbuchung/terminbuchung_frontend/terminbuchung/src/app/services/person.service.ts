@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Person} from "../entities/Person";
 import {SickInformation} from "../entities/SickInformation";
 
+
 const emptyPerson: Person = {
   svnr: '',
   firstName: '',
@@ -80,6 +81,72 @@ export class PersonService {
   public setPerson(p: Person) {
     this.person = p;
   }
+
+  public checkSozVersPruefziffer (sozVersNr: string): boolean {
+    let pruefZ: string = sozVersNr.charAt(3);
+    let pruefZNr: number = +pruefZ;
+    console.log('pruefz:', pruefZNr);
+    let summe: number = 0;
+    let stelle: number = 0;
+
+    do {
+      for (var char of sozVersNr) {
+        if (stelle == 0) {
+          summe = summe + (+sozVersNr.charAt(stelle) * 3);
+        }
+        if (stelle == 1) {
+          summe = summe + (+sozVersNr.charAt(stelle) * 7);
+        }
+        if (stelle == 2) {
+          summe = summe + (+sozVersNr.charAt(stelle) * 9);
+        }
+        if (stelle == 4) {
+          summe = summe + (+sozVersNr.charAt(stelle) * 5);
+        }
+        if (stelle == 5) {
+          summe = summe + (+sozVersNr.charAt(stelle) * 8);
+        }
+        if (stelle == 6) {
+          summe = summe + (+sozVersNr.charAt(stelle) * 4);
+        }
+        if (stelle == 7) {
+          summe = summe + (+sozVersNr.charAt(stelle) * 2);
+        }
+        if (stelle == 8) {
+          summe = summe + (+sozVersNr.charAt(stelle) * 1);
+        }
+        if (stelle == 9) {
+          summe = summe + (+sozVersNr.charAt(stelle) * 6);
+        }
+        stelle++;
+        console.log('stelle:', stelle);
+        console.log('summe:', summe);
+
+      }
+      let erg: number = summe % 11;
+      console.log('Validierungserg:', erg);
+      let sozVersNrString = [...sozVersNr];
+      let i;
+      for (i = 0; i < sozVersNrString.length; i++) {
+        if (i == 2) {
+          sozVersNrString[2] = sozVersNrString[2] + 1;
+        }
+      }
+      sozVersNr =  sozVersNrString.join('');
+
+
+
+    }
+    while ((summe % 11) == 10);
+    if ((summe % 11) == pruefZNr) {
+      return true;
+    }
+    return false;
+
+
+
+  }
+
 
 
 }
