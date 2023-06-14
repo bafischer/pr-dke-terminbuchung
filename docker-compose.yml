@@ -1,4 +1,6 @@
 version: '3.1'
+volumes:
+  data:
 services:
   db:
     image: mariadb
@@ -8,6 +10,8 @@ services:
       MYSQL_DATABASE: terminbuchung
       MYSQL_USER: root
       MYSQL_PASSWORD: admin   
+    volumes:
+      - data:/var/lib/mysql
     ports:
       - "3307:3306"
 
