@@ -18,6 +18,8 @@ export class AppointmentService {
 
 
   private readonly appManagementUrl = 'http://localhost:9191/';
+
+  private readonly locSubstManagementUrl = 'http://localhost:9191/';
   private readonly baseUrl = 'http://localhost:9192/';
 
 
@@ -35,8 +37,9 @@ export class AppointmentService {
 
 
   public getAllDrugs() : Observable<Drug[]> {
-    return this.http.get<Drug[]> (this.appManagementUrl + 'articles');
+    return this.http.get<Drug[]> (this.locSubstManagementUrl + 'articles');
   }
+
 
   public addApp(appToPost: AppointmentTBuch): Observable<AppointmentTBuch> {
     return this.http.post<AppointmentTBuch>(this.baseUrl + 'booked-appointments', appToPost);

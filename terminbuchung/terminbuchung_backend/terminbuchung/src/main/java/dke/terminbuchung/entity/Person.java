@@ -46,7 +46,6 @@ public class Person {
     private String city;
 
 
-
     @NotNull
     private String county;
 
@@ -86,6 +85,22 @@ public class Person {
                   String email, String phoneNr, String streetAndDoorNr, int postalCode,
                   String city, String county) {
         this.id = id;
+        this.svnr = svnr;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthday = birthday;
+        this.email = email;
+        this.phoneNr = phoneNr;
+        this.streetAndDoorNr = streetAndDoorNr;
+        this.postalCode = postalCode;
+        this.city = city;
+        this.county = county;
+    }
+
+    public Person(String svnr, String firstName, String lastName, Date birthday,
+                  String email, String phoneNr, String streetAndDoorNr, int postalCode,
+                  String city, String county) {
+
         this.svnr = svnr;
         this.firstName = firstName;
         this.lastName = lastName;

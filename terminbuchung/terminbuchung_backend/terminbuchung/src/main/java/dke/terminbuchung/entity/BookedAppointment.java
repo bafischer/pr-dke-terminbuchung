@@ -16,9 +16,7 @@ public class BookedAppointment {
 
     private String date;
 
-
     @ManyToOne(cascade = CascadeType.MERGE)
-    //@JoinColumn(name = "tutorial_id", nullable = false)
     private Person person;
 
     private String nameLocation;

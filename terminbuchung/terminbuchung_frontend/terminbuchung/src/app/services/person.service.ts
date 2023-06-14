@@ -33,25 +33,30 @@ export class PersonService {
   private person: Person = emptyPerson;
   private covidTestDate: Date | undefined = new Date();
 
+  //Abfrage aller in der TB-App gespeicherten Personen
   public getPeople():Observable<Person[]> {
     return this.http.get<Person[]>(this.baseurl + 'persons');
   }
 
-
+  //Hinzufügen einer neuen Person in die DB der TB-App
   public addPerson(): Observable<Person> {
     //this.person = person;
     return this.http.post<Person>(this.baseurl + 'persons', this.person);
   }
 
+  //Abfrage der Sick-Informationen (CT-App) für eine bestimmte Person
+  //um Voraussetzungen für die Buchung eines Termins für eine Medikamentenverabreichung zu prüfen
   public getSickInfo(svnr: string): Observable<SickInformation> {
     return this.http.get<SickInformation>
       (this.urlContactTracing + 'person/'+ svnr + '/sickinformation');
   }
 
+  //Abfrage der Daten zu einer in der TB-App gespeicherten Person
   public getPersonBySvnr(svnr: string): Observable<Person> {
     return this.http.get<Person>(this.baseurl + 'persons/'+ svnr);
   }
 
+  //Prüfung der Voraussetzungen für Terminbuchung Medikamentenverabreichung
   public checkConditionMedic(sickInfo: SickInformation, errorMessageMedication: String): boolean {
     this.covidTestDate = sickInfo.covidTestDate;
     let medicationCondFullfilled: boolean = false;
@@ -82,6 +87,7 @@ export class PersonService {
     this.person = p;
   }
 
+  //Validierung der vom Bürger eingegeben SozVersNr; im Speziellen der Prüfziffer (4. Stelle der SozVersNr)
   public checkSozVersPruefziffer (sozVersNr: string): boolean {
     let pruefZ: string = sozVersNr.charAt(3);
     let pruefZNr: number = +pruefZ;

@@ -42,13 +42,13 @@ export class BookForMedicComponent {
 
 
 
-  public personMedication: Person = emptyPerson;
+  //public personMedication: Person = emptyPerson;
 
   public errorMessagePerson: string = '';
 
   public locNameChoosen: string = "";
 
-  public locAvailable: Location[] = [];
+  //public locAvailable: Location[] = [];
   public locNameAvailable: string[] = [];
 
   public appFree: AppointmentTVerw[] = [];

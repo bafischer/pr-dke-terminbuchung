@@ -61,25 +61,6 @@ export class ProvidePersonalInfoComponent {
   constructor(private personService: PersonService, private router: Router) {
   }
 
-  /*savePerson() {
-    this.personService.addPerson(this.person).subscribe((newPerson) => {
-        console.log('newPerson', newPerson);
-        this.errorMessage = "ok";
-      },
-      (error: HttpErrorResponse) => {                            //Error callback
-        this.getErrorDetails(error);
-      });
-  }
-
-  savePersonVacc() {
-    this.personService.addPerson(this.person).subscribe((newPerson) => {
-        console.log('newPerson', newPerson);
-        this.errorMessage = "ok";
-      },
-      (error: HttpErrorResponse) => {                            //Error callback
-        this.getErrorDetails(error);
-      });
-  } */
 
   getSickInformation() {
     this.wantsMedication = true;
@@ -152,11 +133,6 @@ export class ProvidePersonalInfoComponent {
     this.router.navigate(['Terminbuchung-Medikament']);
     console.log(this.person.county);
   }
-
-
-
-
-
 
 
 

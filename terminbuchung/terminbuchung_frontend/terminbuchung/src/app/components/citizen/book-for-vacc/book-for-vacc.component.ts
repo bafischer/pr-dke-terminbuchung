@@ -91,6 +91,9 @@ export class BookForVaccComponent {
   getLocAvailable() {
     if (this.personService.getPerson() != null) {
       this.locNameChoosen = '';
+      //this.locNameAvailable[0] = "Messezentrum Schleissheim";
+      //this.locNameAvailable[1] = "Turnhalle Schleissheim";
+      //this.locNameAvailable[2] = "Musikschule Thalheim";
       this.locNameAvailable = this.locService.getLocAvailable(this.personService.getPerson());
     }
   }

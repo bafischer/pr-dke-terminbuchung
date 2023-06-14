@@ -19,26 +19,23 @@ public class PersonController {
     @Autowired
     private PersonService service;
 
+
+    //Neue Person in DB hinzufügen
     @PostMapping("/persons")
     public ResponseEntity<Person> addPerson(@RequestBody Person person)  {
         return ResponseEntity.ok(service.saveNewPerson(person));
     }
 
+    //Abfrage aller in der DB erfassten Personen
     @GetMapping("/persons")
     public List<Person> findAllPerson() {
         List<Person> listPersons =  service.getPersons();
         return listPersons;
     }
 
-    @DeleteMapping("/persons/{id}")
-    public ResponseEntity<String> deletePersons(@PathVariable (value = "id") int personId)  {
-        if (personId <= 0) {
-            return ResponseEntity.badRequest().build();
-        } else {
-                return ResponseEntity.ok(service.deletePerson(personId));
-            }
-    }
 
+
+    //Abfrage einer in der DB erfassten Person und Identifikation mittels eindeutiger SVNR
     @GetMapping("/persons/{svnr}")
     public Person getPersonById(@PathVariable (value = "svnr") String svnr)  {
         return service.getPersonBySvnr(svnr);

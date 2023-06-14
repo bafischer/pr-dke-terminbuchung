@@ -17,11 +17,14 @@ export class LocationService {
   constructor(private http: HttpClient) {
   }
 
+  //Abfrage aller verfügbaren Standorte (Standortverwaltungs-App) für einen bestimmten Bezirk
   public getLocations(county: string): Observable<Location[]> {
     return this.http.get<Location[]>
     (this.urlLocationManagement + 'locations/' + county);
   }
 
+
+  //Abfrage aller Impf-Standorte für einen bestimmten Bezirk
   public getLocAvailable(p: Person): string[] {
     let locNameAvailable: string[] = [];
     if (p != null) {
@@ -44,7 +47,7 @@ export class LocationService {
 
   }
 
-
+  //Abfrage aller Standorte für die Verabreichung von Medikamenten in einem bestimmten Bezirk
   public getLocAvailableMedic(p: Person): string[] {
     let locNameAvailable: string[] = [];
     if (p != null) {
