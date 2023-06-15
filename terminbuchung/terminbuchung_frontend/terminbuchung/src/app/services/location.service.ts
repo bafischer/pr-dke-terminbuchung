@@ -11,7 +11,7 @@ import {Person} from "../entities/Person";
   providedIn: 'root'
 })
 export class LocationService {
-  private readonly urlLocationManagement = 'http://localhost:9191/';
+  private readonly urlLocationManagement = 'http://localhost:9194/';
 
 
   constructor(private http: HttpClient) {
@@ -20,7 +20,7 @@ export class LocationService {
   //Abfrage aller verfügbaren Standorte (Standortverwaltungs-App) für einen bestimmten Bezirk
   public getLocations(county: string): Observable<Location[]> {
     return this.http.get<Location[]>
-    (this.urlLocationManagement + 'locations/' + county);
+    (this.urlLocationManagement + 'locations/'+ 'all/' + county);
   }
 
 

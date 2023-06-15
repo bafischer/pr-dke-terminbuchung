@@ -19,7 +19,7 @@ export class AppointmentService {
 
   private readonly appManagementUrl = 'http://localhost:9191/';
 
-  private readonly locSubstManagementUrl = 'http://localhost:9191/';
+  private readonly locSubstManagementUrl = 'http://localhost:9194/';
   private readonly baseUrl = 'http://localhost:9192/';
 
 
