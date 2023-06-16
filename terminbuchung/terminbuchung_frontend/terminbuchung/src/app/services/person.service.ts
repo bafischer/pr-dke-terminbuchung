@@ -31,9 +31,11 @@ export class PersonService {
   }
 
   private person: Person = emptyPerson;
-  private covidTestDate: Date | undefined = new Date();
+  private positiveCovidTestDate: Date | undefined = new Date();
 
-  //Abfrage aller in der TB-App gespeicherten Personen
+
+
+//Abfrage aller in der TB-App gespeicherten Personen
   public getPeople():Observable<Person[]> {
     return this.http.get<Person[]>(this.baseurl + 'persons');
   }
@@ -58,12 +60,16 @@ export class PersonService {
 
   //Prüfung der Voraussetzungen für Terminbuchung Medikamentenverabreichung
   public checkConditionMedic(sickInfo: SickInformation, errorMessageMedication: String): boolean {
-    this.covidTestDate = sickInfo.covidTestDate;
+    this.positiveCovidTestDate = sickInfo.positiveCovidTestDate;
     let medicationCondFullfilled: boolean = false;
-    if (errorMessageMedication == "ok" && sickInfo.covidTestDate != null &&
+    console.log('errorMessageMedication: ', errorMessageMedication);
+    console.log('positiveCovidTestDate: ', sickInfo.positiveCovidTestDate);
+    console.log('sick: ', sickInfo.sick);
+    if (errorMessageMedication == "ok" && sickInfo.positiveCovidTestDate != null &&
       sickInfo.sick != null) {
       let sick = sickInfo.sick;
-      let covidTestDate = new Date(sickInfo.covidTestDate);
+      let covidTestDate = new Date(sickInfo.positiveCovidTestDate);
+      console.log('covidTestDate:', covidTestDate);
       let dateNew = new Date();
       dateNew.setDate(covidTestDate.getDate() + 3);
       let dateNow = new Date();
@@ -78,9 +84,12 @@ export class PersonService {
     return this.person
   }
 
+  public getPositiveCovidTestDate(): Date | undefined {
+    return this.positiveCovidTestDate;
+  }
 
-  getCovidTestDate(): Date | undefined {
-    return this.covidTestDate;
+  public setPositiveCovidTestDate(value: Date | undefined) {
+    this.positiveCovidTestDate = value;
   }
 
   public setPerson(p: Person) {

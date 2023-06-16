@@ -109,7 +109,7 @@ export class BookForMedicComponent {
           let j: number = 0;
 
           // @ts-ignore
-          let covidTestDate = new Date(this.personService.getCovidTestDate());
+          let covidTestDate = new Date(this.personService.getPositiveCovidTestDate());
           let dateNew = new Date();
           dateNew.setHours(23);
           dateNew.setMinutes(59);

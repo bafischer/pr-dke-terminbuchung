@@ -22,12 +22,15 @@ const emptySickInfo: SickInformation = {
   id: 0,
   symptoms: false,
   sick: false,
-  symptomStartingDate: new Date("1900-01-01"),
-  covidTestDate: new Date("1900-01-01"),
-  medicationDate: new Date("1900-01-01"),
+  symptomStartingDate: new Date(),
+  covidTestDate: new Date(),
+  medicationDate: new Date(),
   quarantine: false,
-  quarantineStartDate: new Date("1900-01-01"),
-  quarantineEndDate: new Date("1900-01-01")
+  quarantineStartDate: new Date(),
+  quarantineEndDate: new Date(),
+  positiveCovidTestDate: new Date("1900-01-01"),
+  potential: false
+
 }
 
 
@@ -68,14 +71,12 @@ export class ProvidePersonalInfoComponent {
         this.errorMessageMedication = "ok";
         this.errorMessage = "ok";
         this.sickInfo = sInfo;
-        console.log('sickInfo: ', this.sickInfo);
         this.getErrorDetails();
         this.checkConditionMedic();
       },
       (error: HttpErrorResponse) => {
         //Error callback
         this.getErrorDetails();
-        console.log('errorMessage:', this.errorMessage);
         if (this.person.svnr.length != 10 || !(this.person.svnr.match(/^[0-9]*$/))) {
           this.errorMessage = 'Die Sozialversicherungsnummer ist ungültig';}
         else if (error.status === 404 || error.status === 400) {
@@ -87,7 +88,6 @@ export class ProvidePersonalInfoComponent {
 
   checkConditionMedic() {
       this.medicationCondFullfilled = this.personService.checkConditionMedic(this.sickInfo, this.errorMessageMedication);
-      console.log('medicationCondFulfilled: ', this.medicationCondFullfilled);
       if (!this.medicationCondFullfilled) {
           this.errorMessageMedication =
           "Die Voraussetzungen sind laut Contact-Tracing-Datenbank nicht erfüllt";
