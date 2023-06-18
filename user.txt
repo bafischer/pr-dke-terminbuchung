@@ -1,8 +1,0 @@
-CREATE USER 'myuser'@'%' IDENTIFIED BY 'mypass';
-
-GRANT ALL PRIVILEGES ON * . * TO 'myuser'@'%';
-
-DROP SCHEMA IF EXISTS terminbuchung;
-
-CREATE SCHEMA terminbuchung;
-USE  terminbuchung;

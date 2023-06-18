@@ -1,9 +1,12 @@
 
 export type Drug = {
-  id: number;
+  article_id: number;
   name: string;
   type: string;
   minAge: number;
   maxAge: number;
+  stock: number;
+
+
 
 }

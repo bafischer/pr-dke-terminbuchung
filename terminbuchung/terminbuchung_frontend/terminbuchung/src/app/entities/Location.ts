@@ -1,6 +1,6 @@
 
 export type Location = {
-  id: number;
+  location_id: number;
   name: string;
   county: string;
 
