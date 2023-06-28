@@ -35,7 +35,7 @@ export class PersonService {
 
 
 
-//Abfrage aller in der TB-App gespeicherten Personen
+  //Abfrage aller in der TB-App gespeicherten Personen
   public getPeople():Observable<Person[]> {
     return this.http.get<Person[]>(this.baseurl + 'persons');
   }

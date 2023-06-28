@@ -31,11 +31,9 @@ public class TerminbuchungApplication implements CommandLineRunner {
 
 		// Check if the appointments are already in the database
 		Person p1 = new Person();
-		Person p2 = new Person();
 		Person p3 = new Person();
 		Person p4 = new Person();
 		Optional<Person> p1g = null;
-		Optional<Person> p2g = null;
 		Optional<Person> p3g = null;
 		Optional<Person> p4g = null;
 
@@ -43,9 +41,6 @@ public class TerminbuchungApplication implements CommandLineRunner {
 			// Create dummy data
 			String dateString1 = String.format("%d-%02d-%02d", 1980, 1, 1);
 			Date d1 = Date.valueOf(dateString1);
-
-			String dateString2 = String.format("%d-%02d-%02d", 1968, 11, 15);
-			Date d2 = Date.valueOf(dateString2);
 
 			String dateString3 = String.format("%d-%02d-%02d", 1955, 1, 20);
 			Date d3 = Date.valueOf(dateString3);
@@ -60,12 +55,6 @@ public class TerminbuchungApplication implements CommandLineRunner {
 			personRepository.save(p1);
 			p1g = personRepository.findPersonBySvnr(p1.getSvnr());
 
-			/*p2 = new Person("1957151168", "Werner", "Gruber", d2,
-					"wg@gmx.at", "0699/1235687",
-					"Hauptstraße 10", 4611, "Buchkirchen", "Wels-Land");
-
-			personRepository.save(p2);
-			p2g = personRepository.findPersonBySvnr(p2.getSvnr()); */
 
 			p3 = new Person("1234200155", "Maria", "Berger", d3,
 					"m.berger@gmx.at", "0699/1235687",
@@ -83,31 +72,19 @@ public class TerminbuchungApplication implements CommandLineRunner {
 		if (bookedAppointmentRepository.count() == 0) {
 
 			if (p4g.isPresent()) {
-				BookedAppointment ba3 = new BookedAppointment("22.06.2023, 15:00:00", p4g.get(),
+				BookedAppointment ba3 = new BookedAppointment("28.06.2023, 18:00:00", p4g.get(),
 						"Rathaus Marchtrenk",
 						2, "medication", "Molnupiravir", 3,false);
 				bookedAppointmentRepository.save(ba3);
 			}
 
 			if (p3g.isPresent()) {
-				BookedAppointment ba4 = new BookedAppointment("23.06.2023, 19:00:00", p3g.get(),
+				BookedAppointment ba4 = new BookedAppointment("30.06.2023, 19:00:00", p3g.get(),
 						"Linzer Markt",
 						1, "vaccination", "Vaxzevria (AstraZeneca)", 6,false);
 				bookedAppointmentRepository.save(ba4);
 			}
 
-			if (p1g.isPresent()) {
-				BookedAppointment ba1 = new BookedAppointment("01.06.2023, 08:30:00", p1g.get(),
-						"Rathaus Marchtrenk",
-						1, "medication", "Remdesivir", 250,false);
-				bookedAppointmentRepository.save(ba1);
-			}
-
-			/* if (p2g.isPresent()) {
-				BookedAppointment ba2 = new BookedAppointment("03.06.2023, 16:00:00", p2g.get(), "Rathaus Marchtrenk",
-						1, "medication", "Remdesivir", 300,false);
-				bookedAppointmentRepository.save(ba2);
-			} */
 
 
 		}

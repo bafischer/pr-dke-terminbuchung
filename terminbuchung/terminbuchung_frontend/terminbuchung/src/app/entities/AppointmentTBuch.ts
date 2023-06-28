@@ -19,8 +19,6 @@ export type AppointmentTBuch = {
 
   deleted: boolean;
 
-  // plus im backend bei Anzahl der gebuchten Termine für Verabreichung von Medikamenten auf deleted = false einschränken
-  // done, aber noch zu prüfen ob korrekt funktioniert
 
 
 

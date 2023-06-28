@@ -26,6 +26,7 @@ export class AppointmentService {
   constructor(private http: HttpClient) {
   }
 
+  //Aufruf Terminverwaltungs-App um alle freien Termine für einen best. Standort zu erhalten
   public getFreeApp(locname: string): Observable<AppointmentTVerw[]> {
     console.log('locname', locname);
     const params = new HttpParams()
@@ -35,16 +36,17 @@ export class AppointmentService {
     (this.appManagementUrl + 'free-appointments-loc', {params});
   }
 
-
+  //Aufruf Impfstoff-/Medikamentenverwaltungs-App um alle Impfstoffe und Medikamente zu erhalten
   public getAllDrugs() : Observable<Drug[]> {
     return this.http.get<Drug[]> (this.locSubstManagementUrl + 'articles');
   }
 
-
+  // Aufruf Terminbuchungs-App um soeben gebuchten Termin zu speichern
   public addApp(appToPost: AppointmentTBuch): Observable<AppointmentTBuch> {
     return this.http.post<AppointmentTBuch>(this.baseUrl + 'booked-appointments', appToPost);
   }
 
+  // Aufruf Terminverwaltungs-App um einen bis dahin freien Termin als nunmehr gebucht zu markieren
   public addAppTVerw(id: number): Observable<AppointmentTVerw> {
 
     // @ts-ignore

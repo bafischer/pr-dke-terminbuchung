@@ -136,29 +136,6 @@
     </p-dialog>
   </div>
 
-  <!--
-
-  <div *ngIf="this.wantsMedication && !medicationCondFullfilled && errorMessageMedication != ''
-        && errorMessage == ''" class="alert alert-warning">
-    <p-dialog [closable]=false header="Fehler!"  [(visible)]="visible" [style]="{width: '30vw'}">
-      {{errorMessageMedication}}
-      <br>
-      <br>
-      <button pButton type="button" label = "OK" (click)="refresh()" class="p-button-danger"></button>
-    </p-dialog>
-  </div>
-
-  <div *ngIf="this.wantsMedication && medicationCondFullfilled && errorMessageMedication == 'ok'
-            && errorMessage != 'ok' && errorMessage != ''"
-       class="alert alert-warning">
-    <p-dialog [closable]=false header="Fehler!"  [(visible)]="visible" [style]="{width: '30vw'}">
-      {{errorMessage}}
-      <br>
-      <br>
-      <button pButton type="button" label = "OK" (click)="refresh()" class="p-button-danger"></button>
-    </p-dialog>
-  </div>   -->
-
 
   <div *ngIf=" this.wantsMedication && errorMessage != 'ok' && errorMessage != ''
             && errorMessageMedication != 'ok' " class="alert alert-warning">

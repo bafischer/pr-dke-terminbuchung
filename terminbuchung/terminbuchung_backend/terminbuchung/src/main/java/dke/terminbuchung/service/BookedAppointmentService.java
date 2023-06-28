@@ -64,7 +64,6 @@ public class BookedAppointmentService {
         } else {
             Specification<BookedAppointment> specification =
                     BookedAppointmentSpecification.countyNrOfPersBookedMedication(county);
-
             List<BookedAppointment> bookedAppCounty = repository.findAll(specification);
             boolean isDupl = false;
             List<BookedAppointment> bookedAppCountyWoDupl = new ArrayList<>();

@@ -91,8 +91,6 @@ export class ProvidePersonalInfoComponent {
       if (!this.medicationCondFullfilled) {
           this.errorMessageMedication =
           "Die Voraussetzungen sind laut Contact-Tracing-Datenbank nicht erfüllt";
-        } else {
-          //this.savePerson();
         }
   }
 

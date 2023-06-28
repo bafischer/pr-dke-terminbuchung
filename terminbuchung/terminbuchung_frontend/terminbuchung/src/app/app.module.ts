@@ -48,8 +48,8 @@ import { BookForMedicComponent } from './components/citizen/book-for-medic/book-
         CalendarModule,
         FormsModule,
         InputTextModule,
-        InputNumberModule
-        , BrowserAnimationsModule, SelectButtonModule,
+        InputNumberModule,
+        BrowserAnimationsModule, SelectButtonModule,
         DropdownModule,
       DialogModule
 
